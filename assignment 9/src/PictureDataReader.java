@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 
 public class PictureDataReader {
-	public static ArrayList<PictureData>PD() {
+	public static ArrayList<PictureData> PD() {
 		try {
 			ArrayList<PictureData> picData = new ArrayList<PictureData>();
 			Scanner fsc = new Scanner(new File("descriptions.txt"));
@@ -26,8 +26,8 @@ public class PictureDataReader {
 				line = fsc.nextLine().trim(); //takes in the first line
 				if (line.length() > 0) {
 					parts = line.split("\t");
-					p = new PictureData(parts[0], parts[1], parts[2]); //calling constructor from picturedata class
-					picData.add(p); 
+					p = new PictureData(parts[0], parts[1], parts[2]); //calling constructor from PictureData class
+					picData.add(p);
 				}
 			}
 			return picData; 

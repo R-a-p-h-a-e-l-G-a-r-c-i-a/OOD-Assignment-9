@@ -15,21 +15,21 @@ import javax.imageio.ImageIO;
  *
  */
 public class PictureLoader {
-	public static ArrayList<BufferedImage> BU(){
+	public static ArrayList<BufferedImage> BU(ArrayList <PictureData> pData){
 		try {
 			ArrayList<BufferedImage> buffedUp = new ArrayList<BufferedImage>();
-			ArrayList<String> picNames = new ArrayList<String>();
+			/*ArrayList<String> picNames = new ArrayList<String>();
 			picNames.add("pic1.png");
 			picNames.add("pic2.png");
 			picNames.add("pic3.png");
-			picNames.add("pic4.png");
+			picNames.add("pic4.png");*/
 
 			//variables
 			String line;
 			String[] parts;
 
-			for (int i = 0; i < picNames.size(); i++) {
-				BufferedImage img = ImageIO.read(new File(picNames.get(i)));
+			for (PictureData pd: pData) {
+				BufferedImage img = ImageIO.read(new File(pd.getFileName()));
 				buffedUp.add(img);			
 			}
 			return buffedUp;

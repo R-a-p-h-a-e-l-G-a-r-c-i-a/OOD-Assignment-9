@@ -9,7 +9,7 @@
  *private = can't call the variable itself, why we need getters and setters to access
  */
 
-public class PictureData {//DON'T TOUCH THIS ANYMORE
+public class PictureData {//DON'T TOUCH THIS ANYMORE PLEASE FOR THE LOVE OF GOD
 
 	private String fileName, fileDate, fileDesc;
 
