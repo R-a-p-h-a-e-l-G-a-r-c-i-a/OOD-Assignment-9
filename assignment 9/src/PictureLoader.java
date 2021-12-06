@@ -9,20 +9,17 @@ import javax.imageio.ImageIO;
  * loads the png files into BufferedImage objects that you store in an ArrayList<BufferedImage>
  *
  * with a loadImagesFromPictureData function that returns an ArrayList<BufferedImage>. 
- * This function loads the images identified by the filename of each PictureData object into memory so that you can display them.
+ * This function loads the images identified by the filename of each PictureData object 
+ * into memory so that you can display them.
  * 
  * @author R1V1G
  *
  */
 public class PictureLoader {
-	public static ArrayList<BufferedImage> BU(ArrayList <PictureData> pData){
+	//loadImagesFromPictureData function rename?
+	public static ArrayList<BufferedImage> BU (ArrayList <PictureData> pData){ 
 		try {
 			ArrayList<BufferedImage> buffedUp = new ArrayList<BufferedImage>();
-			/*ArrayList<String> picNames = new ArrayList<String>();
-			picNames.add("pic1.png");
-			picNames.add("pic2.png");
-			picNames.add("pic3.png");
-			picNames.add("pic4.png");*/
 
 			//variables
 			String line;
@@ -30,7 +27,7 @@ public class PictureLoader {
 
 			for (PictureData pd: pData) {
 				BufferedImage img = ImageIO.read(new File(pd.getFileName()));
-				buffedUp.add(img);			
+				buffedUp.add(img);
 			}
 			return buffedUp;
 		} catch (Exception ex) {

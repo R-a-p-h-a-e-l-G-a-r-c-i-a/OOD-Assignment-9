@@ -8,6 +8,8 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
+import java.util.ArrayList;
+
 import javax.swing.JPanel;
 
 /**
@@ -22,100 +24,46 @@ import javax.swing.JPanel;
  * @author R1V1G
  *
  */
-public class PicturePanel extends JPanel implements MouseListener, MouseMotionListener {
-	//setPicture and paintComponent functions
+public class PicturePanel extends JPanel implements MouseMotionListener {
 
-	/*
-	private BufferedImage picture;
-	
-	public void setPicture(BufferedImage picture) {	
-		try {
-		picture = ImageIO.read(new File("pic1.png")); //should we try another name or name all of them on the same line?
-	
-		} catch (Exception ex) {
-			System.out.println("The image can't be read.");
-		}
-		repaint(); //this should bring the image?
-	}
-	 */
-
-	
-	private String messageToShow;
+	private String messageToShow; //mouseStatus
 	private int msgX, msgY;
-	private int pointSize;
 	private BufferedImage picture;
 	
-	public PicturePanel(BufferedImage picture) {
-		addMouseListener(this);
+	public PicturePanel() {
+		setPreferredSize(new Dimension(290,190));
+		messageToShow = "(x=0, y=0)"; //starting message
 		addMouseMotionListener(this);
-		pointSize = 20;
-		msgX = -1;
-		msgY = -1;
+		msgX = 10; //starting location
+		msgY = 20; //starting location
+	}
+	
+	//setPictureFunction - takes in buffered object (1 per time), 
+	//that objectname, replaces buffered image object initialize in there, repaint()	
+	public void setPicture(BufferedImage picture) {
 		this.picture = picture;
+		repaint();
 	}
 	
-	
-	public int getPointSize() {
-		return pointSize;
-	}
-	public void setPointSize(int s) {
-		if (s > 0) {
-			pointSize = s;
-		} else {
-			pointSize = 5;
-		}
-	}
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		messageToShow = "Mouse entered the panel.";
-		repaint();
-	}
-	@Override
-	public void mouseExited(MouseEvent e) {
-		messageToShow = "Mouse exited the panel.";
-		repaint();
-	}
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		messageToShow = String.format("Mouse clicked at (%d, %d)", e.getX(), e.getY());
-		repaint();
-	}
-	@Override
-	public void mousePressed(MouseEvent e) {
-		messageToShow = String.format("Mouse pressed at (%d, %d)", e.getX(), e.getY());
-		repaint();
-	}
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		messageToShow = String.format("Mouse released at (%d, %d)", e.getX(),e.getY());
-		repaint();
-	}
+	//the mouse events
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		messageToShow = String.format("Mouse is at (%d, %d)", e.getX(),e.getY());
+		messageToShow = String.format("(x=%d, y=%d)", e.getX(),e.getY());
 		repaint();
 	}
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		messageToShow = String.format("Mouse dragged at (%d, %d)", e.getX(),e.getY());
+		messageToShow = String.format("(x=%d, y=%d)", e.getX(),e.getY());
 		msgX = e.getX();
 		msgY = e.getY();
 		repaint();		
 	}
+	
+	//graphics
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(this.picture,0,0,null);
-		g.drawString(messageToShow, 20,20);
-
-		/*
-		try {
-			BufferedImage img = ImageIO.read(new File("pic1.png"));
-			g.drawImage(img, 150, 60, null);
-		} catch (Exception ex) {
-			System.out.println("The image can't be read... "
-					+ "unless it's supposed to be invisible"
-					+ "I don't get art.");
-		}*/
+		//g.drawString(messageToShow, msgX, msgY); //this will move where ever user clicks
 	}
 }

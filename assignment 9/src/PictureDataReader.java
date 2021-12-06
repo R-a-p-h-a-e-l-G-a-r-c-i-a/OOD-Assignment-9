@@ -4,19 +4,20 @@ import java.util.Scanner;
 
 /**
  * Needs a readPictureDataFromFile function that returns an ArrayList<PictureData>. 
- * You call it near the beginning of your program to create the PictureDataReader objects that will serve as the model for your application.
+ * You call it near the beginning of your program to create the PictureDataReader 
+ * objects that will serve as the model for your application.
  * 
- * reading PictureData from a text file, and it must have a PictureDataWriter for writing the data back to a text file
+ * reading PictureData from a text file, and it must have a PictureDataWriter for writing 
+ * the data back to a text file
  * @author R1V1G
  *
  */
 
 public class PictureDataReader {
-	public static ArrayList<PictureData> PD() {
+	public static ArrayList<PictureData> PD() {//rename to readPictureDataFromFile?
 		try {
 			ArrayList<PictureData> picData = new ArrayList<PictureData>();
 			Scanner fsc = new Scanner(new File("descriptions.txt"));
-
 			//variables for Array
 			String line;
 			String[] parts;
@@ -33,7 +34,6 @@ public class PictureDataReader {
 			return picData; 
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			//System.out.println(ex);
 			return null;
 		}
 	}

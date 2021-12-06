@@ -1,3 +1,7 @@
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  * for writing the data back to a text file
  * 
@@ -12,5 +16,27 @@
 
 
 public class PictureDataWriter {
-
+	/*
+	public static boolean writeToFile(ArrayList<PictureData> writing, File f) {
+		 String fname = f.getName();
+		 if (fname.endsWith(".txt")) {
+			 return writeToTextFile(writing,f);
+		 } else {
+			 return false;
+		 }
+	}
+	/*
+	public static boolean writeToTextFile(ArrayList<PictureData> writing, File f) {
+		try {
+			PictureDataWriter pdw = new PictureDataWriter(new BufferedWriter(new FileWriter(f)));
+			for (PictureData write: wrt) {
+				pdw.println(write);
+				
+			}
+			pdw.close();
+			return true;
+		} catch (Exception ex) {
+			return false;
+		}
+	}*/
 }
