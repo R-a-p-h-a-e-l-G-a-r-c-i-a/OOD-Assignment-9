@@ -1,4 +1,7 @@
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,28 +18,20 @@ import java.util.Scanner;
  */
 
 
-public class PictureDataWriter {
-	/*
-	public static boolean writeToFile(ArrayList<PictureData> writing, File f) {
-		 String fname = f.getName();
-		 if (fname.endsWith(".txt")) {
-			 return writeToTextFile(writing,f);
-		 } else {
-			 return false;
-		 }
-	}
-	/*
-	public static boolean writeToTextFile(ArrayList<PictureData> writing, File f) {
+public class PictureDataWriter{
+	public PictureDataWriter() {	
+		}
+		
+	public static boolean writeToTextFile(ArrayList<PictureData> writing, String f) {
 		try {
-			PictureDataWriter pdw = new PictureDataWriter(new BufferedWriter(new FileWriter(f)));
-			for (PictureData write: wrt) {
-				pdw.println(write);
-				
+			PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(f)));
+			for (PictureData write: writing) {
+				pw.println(write);			
 			}
-			pdw.close();
+			pw.close();
 			return true;
 		} catch (Exception ex) {
 			return false;
 		}
-	}*/
+	}
 }

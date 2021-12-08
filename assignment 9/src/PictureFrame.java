@@ -50,11 +50,14 @@ public class PictureFrame extends JFrame {
 		//At the very top
 		setTitle("Picture Frame");
 		JMenuBar mbar = new JMenuBar();
-		JMenu menuFile = new JMenu("File");
+		JMenu menuFile = new JMenu("File"); //title for section
 		JMenuItem menitSave = new JMenuItem("Save"); //subitems for menu
 		menitSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//save goes here...
+				menitSave.addActionListener(this);
+				PD.get(picNumb).setFileDate(artDate.getText());
+				PD.get(picNumb).setFileDesc(artDesc.getText());
+				savePictureAndDesc();
 			}
 		});
 		
@@ -68,7 +71,7 @@ public class PictureFrame extends JFrame {
 		menuFile.add(menitExit);
 		mbar.add(menuFile);
 		
-		JMenu menuHelp = new JMenu("Help");
+		JMenu menuHelp = new JMenu("Help"); //title for section
 		JMenuItem menitAbout = new JMenuItem("About");
 		menitAbout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -94,35 +97,6 @@ public class PictureFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		Container c = getContentPane();
 		c.setLayout(new BorderLayout());
-
-		/*
-		// Picture Panel - North Border
-		BigPP = new PicturePanel();
-		c.add(BigPP, BorderLayout.NORTH);
-		
-		// Picture Data Panel South Border
-		JPanel panSouth = new JPanel();
-		panSouth.setLayout(new BorderLayout());
-		artDesc = new JTextArea(5, 10);
-		artDesc.setLineWrap(true);
-		artDate = new JTextField(10);
-		panSouth.add(artDate, BorderLayout.NORTH);
-		panSouth.add(artDesc, BorderLayout.CENTER);
-		
-		// Button Panel - South Border
-		JPanel panButt = new JPanel();
-		panButt.setLayout(new FlowLayout());
-		JButton preButt = new JButton("Prev");
-		JButton saveButt = new JButton("Save");
-		JButton nextButt = new JButton("Next");
-
-		
-		panButt.add(preButt);
-		panButt.add(saveButt);
-		panButt.add(nextButt);
-		panSouth.add(panButt, BorderLayout.SOUTH);
-		c.add(panSouth, BorderLayout.CENTER);*/
-
 		
 		//for the pictures
 		BigPP = new PicturePanel();
@@ -135,7 +109,6 @@ public class PictureFrame extends JFrame {
 		//initialize both date and description, add to panSouth 
 		//borderLayout - new borderLayout create and add .North and .South
 		artDate = new JTextField(20);
-		//c.add(panSouth, BorderLayout.NORTH);
 		artDesc = new JTextArea(1,1); //int row and int column
 		artDesc.setLineWrap(true);
 		panSouth.add(artDate,BorderLayout.NORTH);
@@ -161,7 +134,9 @@ public class PictureFrame extends JFrame {
 		JButton saveButt = new JButton("Save");
 		saveButt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				saveButt.addActionListener(this);
+				PD.get(picNumb).setFileDate(artDate.getText());
+				PD.get(picNumb).setFileDesc(artDesc.getText());
+				savePictureAndDesc();
 			}
 		});
 		JButton nextButt = new JButton("Next");
@@ -172,8 +147,6 @@ public class PictureFrame extends JFrame {
 				repaint();
 			}
 		});
-		
-		//add jpanels for buttons into pansouth and borderlayout is?
 		
 		panButt.add(preButt);
 		panButt.add(saveButt);
@@ -189,6 +162,10 @@ public class PictureFrame extends JFrame {
 		} else {
 			picNumb = picNumb % BI.size();
 		}
+	}
+	
+	public void savePictureAndDesc() {
+		PictureDataWriter.writeToTextFile(PD, "descriptions.txt");
 	}
 
 	public PictureFrame(ArrayList<PictureData> PD, ArrayList<BufferedImage> BI) {

@@ -1,15 +1,9 @@
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.io.File;
-import java.util.ArrayList;
-
 import javax.swing.JPanel;
 
 /**
@@ -24,7 +18,7 @@ import javax.swing.JPanel;
  * @author R1V1G
  *
  */
-public class PicturePanel extends JPanel implements MouseMotionListener {
+public class PicturePanel extends JPanel implements MouseListener, MouseMotionListener {
 
 	private String messageToShow; //mouseStatus
 	private int msgX, msgY;
@@ -34,6 +28,7 @@ public class PicturePanel extends JPanel implements MouseMotionListener {
 		setPreferredSize(new Dimension(290,190));
 		messageToShow = "(x=0, y=0)"; //starting message
 		addMouseMotionListener(this);
+		addMouseListener(this);
 		msgX = 10; //starting location
 		msgY = 20; //starting location
 	}
@@ -47,6 +42,13 @@ public class PicturePanel extends JPanel implements MouseMotionListener {
 	
 	//the mouse events
 	@Override
+	public void mouseClicked(MouseEvent e) {
+		messageToShow = String.format("(x=%d, y=%d)", e.getX(), e.getY());
+		msgX = e.getX();
+		msgY = e.getY();
+		repaint();
+	}
+	@Override
 	public void mouseMoved(MouseEvent e) {
 		messageToShow = String.format("(x=%d, y=%d)", e.getX(),e.getY());
 		repaint();
@@ -58,12 +60,36 @@ public class PicturePanel extends JPanel implements MouseMotionListener {
 		msgY = e.getY();
 		repaint();		
 	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		messageToShow = String.format("(x=%d, y=%d)", e.getX(), e.getY());
+		repaint();
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		messageToShow = String.format("(x=%d, y=%d)", e.getX(), e.getY());
+		repaint();
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		messageToShow = String.format("(x=%d, y=%d)", e.getX(), e.getY());
+		repaint();
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		messageToShow = String.format("(x=%d, y=%d)", e.getX(), e.getY());
+		repaint();
+	}
+	
 	
 	//graphics
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(this.picture,0,0,null);
-		//g.drawString(messageToShow, msgX, msgY); //this will move where ever user clicks
+		g.drawString(messageToShow, msgX, msgY); //this will move where ever user clicks
 	}
 }

@@ -1,8 +1,6 @@
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Scanner;
-
 import javax.imageio.ImageIO;
 
 /**
@@ -20,10 +18,6 @@ public class PictureLoader {
 	public static ArrayList<BufferedImage> BU (ArrayList <PictureData> pData){ 
 		try {
 			ArrayList<BufferedImage> buffedUp = new ArrayList<BufferedImage>();
-
-			//variables
-			String line;
-			String[] parts;
 
 			for (PictureData pd: pData) {
 				BufferedImage img = ImageIO.read(new File(pd.getFileName()));

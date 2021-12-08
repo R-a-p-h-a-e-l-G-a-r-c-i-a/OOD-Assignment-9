@@ -41,6 +41,6 @@ public class PictureData {//DON'T TOUCH THIS ANYMORE PLEASE FOR THE LOVE OF GOD
 	
 	@Override
 	public String toString() {
-		return String.format("Filename: %s \nFileDate: %s \nFileDesc: %s" , fileName, fileDate, fileDesc);
+		return String.format("%s\t%s\t%s" , fileName, fileDate, fileDesc);
 	}
 }
